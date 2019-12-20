@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	
+ 	<constant name="struts.action.extension" value="do" />
+ 	
+	<package name="default" namespace="/" extends="json-default"></package>
+
+		<include file="struts/struts-it.xml"></include>
+		<include file="struts/struts-zz.xml"></include>
+	<package name="xiaofang" namespace="/xiaofang" extends="json-default">
+	<action name="*_*" class="action.{1}Action" method="{2}">
+	 <result name="query_success">/transit-jsp/xiaofang-tr.jsp</result> 
+	   <result name="add_success" type="redirect">/show/xiaofang.jsp</result> 
+	   <result type="json" name="checkByDate"><param name="root">object</param></result>
+	</action>
+	</package>
+	
+	<package name="miehuo" namespace="/miehuo" extends="json-default">
+	<action name="*_*" class="action.{1}Action" method="{2}">
+	 <result name="query_success">/transit-jsp/miehuo-tr.jsp</result> 
+	  <result name="add_success" type="redirect">/show/miehuo.jsp</result> 
+	  <result type="json" name="checkByDate"><param name="root">object</param></result>
+	</action>
+	</package>
+	
+	<package name="device" namespace="/device" extends="json-default">
+	<action name="*_*" class="action.{1}Action" method="{2}">
+	 <result  type="json" name="ok"></result>
+	 <result type="json" name="query_success"><param name="root">object</param></result>
+	 
+	  <result name="add_success" type="redirect">/show/miehuo.jsp</result> 
+	</action>
+	</package>
+	
+	<package name="login" namespace="/login" extends="json-default">
+	<action name="*_*" class="action.{1}Action" method="{2}">
+	  <result type="json" name="queryAuth_success"><param name="root">object</param></result>
+	  <result name="query_success" >/view/main/ezui.jsp</result> 
+	  <result type="json" name="query2_success"><param name="root">object3</param></result>
+	  <!-- <result type="json" name="query_success"><param name="root">object2</param></result> -->
+	  <result name="query_error" >/login.jsp</result>  
+	   <result name="update_success" type="redirect">/view/main/ezui.jsp</result>
+	</action>
+	</package>
+	
+	<package name="Users" namespace="/user" extends="json-default">
+	<action name="*_*" class="action.{1}Action" method="{2}"> 
+	  <result type="json" name="queryAll_success"><param name="root">users</param></result>
+	   <result name="addUser_success" type="redirect">/pc/user_auth/user_query.jsp</result>
+	</action>
+	</package>
+	
+	
+	
+	
+	<package name="area" namespace="/area" extends="json-default">
+	<action name="*_*" class="action.{1}Action" method="{2}">
+	 <result name="add_success" type="redirect">/pc/area_query.jsp</result>
+	  <result type="json" name="query_success"><param name="root">object</param></result>
+	   <result type="json" name="queryShuoming_success"><param name="root">object2</param></result>
+	</action>
+	</package>
+	<package name="category" namespace="/category" extends="json-default">
+	<action name="*_*" class="action.{1}Action" method="{2}">
+	 <result name="add_success" type="redirect">/pc/area_query.jsp</result>
+	  <result type="json" name="query_success"><param name="root">object</param></result>
+	  <result type="json" name="queryLeibie_success"><param name="root">object2</param></result>
+	</action>
+	</package>
+	
+	<package name="permissions" namespace="/permissions" extends="json-default">
+	<action name="*_*" class="action.user_auth.{1}Action" method="{2}">
+	 <result name="add_success" type="redirect">/pc/user_auth/permissions_query.jsp</result>
+	  <result type="json" name="query_success"><param name="root">object</param></result>
+	  <result type="json" name="queryByName_success"><param name="root">object2</param></result>
+	   <result  type="json" name="authQuery_success"><param name="root">uauth</param></result>
+	   <result name="addAuth_success" type="redirect">/pc/user_auth/permissions_query.jsp</result>
+	   <result  type="json" name="addAuth1_success"><param name="root">cauth</param></result>
+	</action>
+	</package>
+</struts>    
