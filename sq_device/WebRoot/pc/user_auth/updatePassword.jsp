@@ -64,7 +64,7 @@ setname();
 	 
  	 if($("#uname").val()!=null&& "" != $("#uname").val() && $("#pword").val() !=null&&
 			 "" != $("#pword").val() && $("#pwordNew").val() !=null&& "" != $("#pwordNew").val()){ 
-			 alert($("#pword").val());
+			 
 		 $.ajax({
 		type: "post",
 		 url:"login/Users_query2.do",
@@ -88,8 +88,12 @@ setname();
 		success: function () {
 		
 	     alert("修改成功");
-		
-		window.location.href="pc/welcom.jsp";
+		var urlStr = document.URL;  
+           
+             
+            urlStr = urlStr.substring(0, 32); 
+          
+          window.top.location=urlStr+"login.jsp";  // 跳转到登录页   
 		
 	    },
 	    error:function(){
@@ -125,7 +129,7 @@ var user="<%=session.getAttribute("user")%>";
             var urlStr = document.URL;  
              var endIndex = urlStr.indexOf('xxxxxxxxxx');  
              
-            urlStr = urlStr.substring(0, 40); 
+            urlStr = urlStr.substring(0, 32); 
           
           window.top.location= urlStr + "/login.jsp";  // 跳转到登录页  
            

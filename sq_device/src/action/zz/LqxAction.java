@@ -28,6 +28,24 @@ public class LqxAction extends SuperAction{
 private Object lqx;	
 private Object lqxt;
 private Object lqxH;
+private Object lqxYSQ;
+private Object lqxBM;
+
+public Object getLqxBM() {
+	return lqxBM;
+}
+
+public void setLqxBM(Object lqxBM) {
+	this.lqxBM = lqxBM;
+}
+
+public Object getLqxYSQ() {
+	return lqxYSQ;
+}
+
+public void setLqxYSQ(Object lqxYSQ) {
+	this.lqxYSQ = lqxYSQ;
+}
 
 public Object getLqxH() {
 	return lqxH;
@@ -63,9 +81,9 @@ public void setLqx(Object lqx) {
 
 	public String  queryL() {
 		LqxDao lqxDao=new LqxDaoImpl();
-		String stateL=request.getParameter("stateL");
-		System.out.println(stateL);
-		List<Lqx> result =lqxDao.queryB(stateL);
+		String user=request.getParameter("user");
+		System.out.println(user);
+		List<Lqx> result =lqxDao.queryB(user);
 		System.out.println();
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.registerJsonValueProcessor(Timestamp.class , new JsonDateValueProcessor());
@@ -78,6 +96,26 @@ public void setLqx(Object lqx) {
 	    this.lqxt=obj;
 	    return "queryL_success";
 }
+	
+	public String  queryYSQ() {
+		LqxDao lqxDao=new LqxDaoImpl();
+		String user=request.getParameter("user");
+		System.out.println(user);
+		List<Lqx> result =lqxDao.queryYSQ(user);
+		System.out.println();
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.registerJsonValueProcessor(Timestamp.class , new JsonDateValueProcessor());
+		JSONArray js=JSONArray.fromObject(result,jsonConfig);
+		JSONObject obj=new JSONObject();
+
+
+	    obj.put("data", js.toString());
+	    System.out.println(obj);
+	    this.lqxYSQ=obj;
+	    return "queryYSQ_success";
+}
+	
+	
 	
 	public String  queryH() {
 		LqxDao lqxDao=new LqxDaoImpl();
@@ -95,6 +133,43 @@ public void setLqx(Object lqx) {
 	    System.out.println(obj);
 	    this.lqxH=obj;
 	    return "queryH_success";
+}
+	
+	
+	public String  queryBM() {
+		LqxDao lqxDao=new LqxDaoImpl();
+		String depar=request.getParameter("department");
+		System.out.println(depar);
+		List<Lqx> result =lqxDao.queryBM(depar);
+		System.out.println(result);
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.registerJsonValueProcessor(Timestamp.class , new JsonDateValueProcessor());
+		JSONArray js=JSONArray.fromObject(result,jsonConfig);
+		JSONObject obj=new JSONObject();
+
+
+	    obj.put("data", js.toString());
+	    System.out.println(obj);
+	    this.lqxBM=obj;
+	    return "queryBM_success";
+}
+	
+	public String  queryZK() {
+		LqxDao lqxDao=new LqxDaoImpl();
+		String depar=request.getParameter("department");
+		System.out.println(depar);
+		List<Lqx> result =lqxDao.queryZK();
+		System.out.println(result);
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.registerJsonValueProcessor(Timestamp.class , new JsonDateValueProcessor());
+		JSONArray js=JSONArray.fromObject(result,jsonConfig);
+		JSONObject obj=new JSONObject();
+
+
+	    obj.put("data", js.toString());
+	    System.out.println(obj);
+	    this.lqxBM=obj;
+	    return "queryBM_success";
 }
 	
 	
@@ -117,8 +192,8 @@ public void setLqx(Object lqx) {
 	String sort=request.getParameter("sort");
 	String sortNum=request.getParameter("sortNum");
 	String stateL=request.getParameter("stateL");
-	String qc_real=request.getParameter("qc_real");
-	System.out.println(qc_real+"*******************************************");
+	//String qc_real=request.getParameter("qc_real");
+	//System.out.println(qc_real+"*******************************************");
 	String resuAll="流程未到";
 	 Date date1=new Date();     
      Timestamp apTime = new Timestamp(date1.getTime());
@@ -134,7 +209,7 @@ public void setLqx(Object lqx) {
 	lqx.setPrincipalL(principal);
 	lqx.setProposerL(proposer);
 	lqx.setQcL(qc);
-	lqx.setQc_real(qc_real);
+	//lqx.setQc_real(qc_real);
 	lqx.setSortL(sort);
 	lqx.setSortNum(sortNum);
 	lqx.setSupplierL(supplier);
@@ -164,8 +239,8 @@ public void setLqx(Object lqx) {
 			    b[i] += 256;
 			}
 		}
-		imgFilePath = "D:\\images\\"+user+"_"+dateString+".png";
-		String imgFilePath2 = "images\\"+user+"_"+dateString+".png";
+		imgFilePath = "D:\\images\\lqx\\"+user+"_"+dateString+".png";
+		String imgFilePath2 = "images\\lqx\\"+user+"_"+dateString+".png";
 		String propNum=dateString+user;
 		lqx.setUrlString(imgFilePath2);
 		lqx.setPropNum(propNum);
@@ -196,7 +271,7 @@ public void setLqx(Object lqx) {
 		String princ_resu=request.getParameter("princ_resu");
 		 Date date=new Date();     
 	     Timestamp prTime = new Timestamp(date.getTime());
-		System.out.println(stateL+prDescr+propNum+princ_resu);
+		//System.out.println(stateL+prDescr+propNum+princ_resu);
 		Lqx lqx=new Lqx();
 		lqx.setStateL(stateL);
 		lqx.setPrDescr(prDescr);
@@ -214,7 +289,7 @@ public void setLqx(Object lqx) {
 		String princ_resu=request.getParameter("princ_resu");
 		 Date date=new Date();     
 	     Timestamp prTime = new Timestamp(date.getTime());
-		System.out.println(stateL+prDescr+propNum+princ_resu);
+	//	System.out.println(stateL+prDescr+propNum+princ_resu);
 		Lqx lqx=new Lqx();
 		lqx.setStateL(stateL);
 		lqx.setPrDescr(prDescr);
@@ -230,6 +305,7 @@ public void setLqx(Object lqx) {
 		String qcDescr=request.getParameter("qcDescr");
 		String propNum=request.getParameter("propNum");
 		String qc_resu=request.getParameter("qc_resu");
+		String sortL=request.getParameter("sort");
 		 Date date=new Date();     
 	     Timestamp qcTime = new Timestamp(date.getTime());
 		System.out.println(stateL+qcDescr+propNum+qc_resu);
@@ -239,6 +315,7 @@ public void setLqx(Object lqx) {
 		lqx.setPropNum(propNum);
 		lqx.setQc_resu(qc_resu);
 		lqx.setQcTime(qcTime);
+		lqx.setSortL(sortL);
 		LqxDao lDao=new LqxDaoImpl();
 		lDao.updateL(lqx);
 		return "update_success";
@@ -246,15 +323,19 @@ public void setLqx(Object lqx) {
 		String qcDescr=request.getParameter("qcDescr");
 		String propNum=request.getParameter("propNum");
 		String qc_resu=request.getParameter("qc_resu");
+		String qc_real=request.getParameter("qc_real");
+		String sortL=request.getParameter("sort");
 		 Date date=new Date();     
 	     Timestamp qcTime = new Timestamp(date.getTime());
 		System.out.println(stateL+qcDescr+propNum+qc_resu);
 		Lqx lqx=new Lqx();
 		lqx.setStateL(stateL);
 		lqx.setQcDescr(qcDescr);
+		lqx.setQc_real(qc_real);
 		lqx.setPropNum(propNum);
 		lqx.setQc_resu(qc_resu);
 		lqx.setQcTime(qcTime);
+		lqx.setSortL(sortL);
 		LqxDao lDao=new LqxDaoImpl();
 		lDao.updateL(lqx);
 		return "update_success";
@@ -279,6 +360,7 @@ public void setLqx(Object lqx) {
 		String qcDescr=request.getParameter("qcDescr");
 		String propNum=request.getParameter("propNum");
 		String qc_resu=request.getParameter("qc_resu");
+		String sortL=request.getParameter("sort");
 		 Date date=new Date();     
 	     Timestamp qcTime = new Timestamp(date.getTime());
 	     System.out.println("daodishaqingk2");
@@ -288,6 +370,7 @@ public void setLqx(Object lqx) {
 		lqx.setPropNum(propNum);
 		lqx.setQc_resu(qc_resu);
 		lqx.setQcTime(qcTime);
+		lqx.setSortL(sortL);
 		LqxDao lDao=new LqxDaoImpl();
 		lDao.updateL(lqx);
 		return "update_success";

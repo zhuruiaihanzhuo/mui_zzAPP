@@ -64,7 +64,7 @@ public class UserDAOImpl implements UsersDAO {
 			//通过sqlSession执行sql语句；
 		 users2=sqlSession.selectOne("User_auth.select",users);
 		
-			
+			System.out.println(users2);
 		 sqlSession.commit();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -240,6 +240,80 @@ public class UserDAOImpl implements UsersDAO {
 					
 					return null;
 				}
+	}
+
+
+
+
+
+	@Override
+	public List<Grou> queryGroup() {
+		DBA dba=new DBA();
+		List<Grou> grouList=new ArrayList<Grou>();
+		SqlSession sqlSession=null;
+		
+		try {
+
+			sqlSession=	dba.getSqlSession();
+	
+			//通过sqlSession执行sql语句；
+	grouList=sqlSession.selectList("User_auth.GroupAll");
+		
+		System.out.println();
+			
+		 sqlSession.commit();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			} finally{
+				if (sqlSession !=null) {
+					sqlSession.close();
+				}	
+			}
+		if (grouList!=null) {
+		
+			return grouList;
+		}else {
+			
+			return null;
+		}
+	}
+
+
+
+
+
+	@Override
+	public List<Users> selectAllDepar(String depar) {
+		DBA dba=new DBA();
+		 List<Users> userList= new ArrayList<Users>();
+		SqlSession sqlSession=null;
+		
+		try {
+
+			sqlSession=	dba.getSqlSession();
+	if (depar.equals("信息科")) {
+		 userList=sqlSession.selectList("User_auth.selectAll");
+	} else {
+		 userList=sqlSession.selectList("User_auth.selectDepar",depar);
+	}
+			//通过sqlSession执行sql语句；
+		
+		
+			
+		 sqlSession.commit();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			} finally{
+				if (sqlSession !=null) {
+					sqlSession.close();
+				}	
+			}
+		
+		return	 userList;
 	}
 
 

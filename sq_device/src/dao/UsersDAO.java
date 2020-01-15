@@ -15,4 +15,6 @@ public interface UsersDAO {
 	public List<Users> selectAll() ;
 	public boolean addUser(Users users);
 	public  Grou selectGroup(Users users);
+	public  List<Grou> queryGroup();
+	public List<Users> selectAllDepar(String  depar) ;
 }

@@ -12,6 +12,8 @@
 	   <result type="json" name="update_success"><param name="root">lqx</param></result>
 	      <result type="json" name="update_error"><param name="root">lqx</param></result>
 	       <result type="json" name="queryH_success"><param name="root">lqxH</param></result>
+	        <result type="json" name="queryYSQ_success"><param name="root">lqxYSQ</param></result>
+	         <result type="json" name="queryBM_success"><param name="root">lqxBM</param></result>
 	</action>
 </package>
 	

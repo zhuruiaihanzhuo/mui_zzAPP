@@ -14,6 +14,10 @@ import java.util.List;
 
 
 
+
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import util.JsonDateValueProcessor;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -38,7 +42,28 @@ public class UsersAction extends SuperAction {
 	private Object object2;
 	private Object object3;
 	private Object users;
-	
+	private Object object4;
+	private Object grouObj;
+	public Object getGrouObj() {
+		return grouObj;
+	}
+
+
+	public void setGrouObj(Object grouObj) {
+		this.grouObj = grouObj;
+	}
+
+
+	public Object getObject4() {
+		return object4;
+	}
+
+
+	public void setObject4(Object object4) {
+		this.object4 = object4;
+	}
+
+
 	public Object getObject3() {
 		return object3;
 	}
@@ -123,7 +148,7 @@ public String  query() {
 		UsersDAO udao=new UserDAOImpl();
 		String username  =request.getParameter("username");
 		String password =request.getParameter("password");
-		System.out.println(password+"咋的啦");
+	
 		Users users=new Users();
 		users.setUsername(username);
 		users.setPassword(password);
@@ -165,6 +190,60 @@ public String  queryAll() {
 
 }
 
+public String  queryByDepar() {
+	String depar =request.getParameter("depar");
+	UsersDAO udao=new UserDAOImpl();
+	
+	List<Users> users= udao.selectAllDepar(depar);
+    JsonConfig jsonConfig = new JsonConfig();
+	jsonConfig.registerJsonValueProcessor(Timestamp.class , new JsonDateValueProcessor());
+	JSONArray js=JSONArray.fromObject(users,jsonConfig);
+	JSONObject obj=new JSONObject();
+	obj.put("data", js.toString());
+	this.users=obj;
+    
+    
+    
+	
+	System.out.println(users);
+	
+	
+		return "queryAll_success";
+
+
+}
+
+
+
+public String  query4() {
+	
+	UsersDAO udao=new UserDAOImpl();
+	String username  =request.getParameter("username");
+	String password =request.getParameter("pword");
+	
+	Users users=new Users();
+	users.setUsername(username);
+	users.setPassword(password);
+	Users resu =udao.usersLogin(users);
+	System.out.println(users.getPassword()+"222222"+users.getUsername());
+	//Grou group=udao.selectGroup(users);
+	/*String grou=group.getGrou();
+	String princp=group.getPrincipal();
+	String qc=group.getQc();*/
+//	System.out.println(group.getQc()+"55555555555555555555"+grou+princp+qc);
+//	System.out.println(resu);
+	
+	session.setAttribute("uid", resu.getId());
+	session.setAttribute("user", username);
+	session.setAttribute("name", resu.getName());
+	//session.setAttribute("uid", resu.getId());
+		this.object4=resu;
+	System.out.println(object4);
+		return "query4_success";
+	
+	
+
+}
 
 public String  query2() {
 	
@@ -176,14 +255,9 @@ public String  query2() {
 	users.setUsername(username);
 	users.setPassword(password);
 	Users resu =udao.usersLogin(users);
-	Grou group=udao.selectGroup(users);
-	String grou=group.getGrou();
-	String princp=group.getPrincipal();
-	String qc=group.getQc();
-//	System.out.println(group.getQc()+"55555555555555555555"+grou+princp+qc);
-//	System.out.println(resu);
 	
-	session.setAttribute("uid", resu.getId());
+	System.out.println(resu);
+	session.setAttribute("bumen", resu.getBumen());
 	session.setAttribute("user", username);
 	session.setAttribute("name", resu.getName());
 	session.setAttribute("uid", resu.getId());
@@ -195,12 +269,48 @@ public String  query2() {
 
 }
 
+public String  querypwd() {
+	
+	UsersDAO udao=new UserDAOImpl();
+	String username  =request.getParameter("username");
+	String password =request.getParameter("pword");
+
+	Users users=new Users();
+	users.setUsername(username);
+	users.setPassword(password);
+	Users resu =udao.usersLogin(users);
+	System.out.println(users.getPassword()+"222222"+users.getUsername());
+	//Grou group=udao.selectGroup(users);
+	/*String grou=group.getGrou();
+	String princp=group.getPrincipal();
+	String qc=group.getQc();*/
+//	System.out.println(group.getQc()+"55555555555555555555"+grou+princp+qc);
+//	System.out.println(resu);
+	
+	session.setAttribute("uid", resu.getId());
+	session.setAttribute("user", username);
+	session.setAttribute("name", resu.getName());
+	//session.setAttribute("uid", resu.getId());
+	JSONObject obj=new JSONObject();
+
+
+    obj.put("data", resu);
+   
+		this.object4=obj;
+		return "query4_success";
+	
+	
+
+}
+
+
+
 public String  queryApp() {
 	
 	UsersDAO udao=new UserDAOImpl();
 	String username  =request.getParameter("username");
 	String password =request.getParameter("password");
-	System.out.println(password+"咋的啦");
+	
 	Users users=new Users();
 	users.setUsername(username);
 	users.setPassword(password);
@@ -219,7 +329,12 @@ public String  queryApp() {
 	session.setAttribute("user", username);
 	session.setAttribute("name", resu.getName());
 	session.setAttribute("uid", resu.getId());*/
-		object3=group;
+	JSONObject obj=new JSONObject();
+
+
+    obj.put("users", resu);
+    obj.put("grou", group);
+		this.object3=obj;
 	
 		return "query2_success";
 	
@@ -249,6 +364,29 @@ public String  update() {
 	}
 
 }
+public String  updateApp() {
+	
+	UsersDAO udao=new UserDAOImpl();
+	String username  =request.getParameter("username");
+	
+	String passwordNew =request.getParameter("passwordNew");
+	System.out.println(passwordNew+"999999999996666666");
+	Users users=new Users();
+	users.setUsername(username);
+	users.setPassword(passwordNew);
+	boolean resu =udao.update(users);
+	System.out.println(resu);
+	JSONObject obj=new JSONObject();
+
+
+    obj.put("data", resu);
+   
+		this.object4=obj;
+		return "query4_success";
+
+}
+
+
 
 public String addUser() {
 	
@@ -320,5 +458,29 @@ public String  query_app() {
 
 	
 }
+
+public String  queryGrou() {
+	
+	UsersDAO udao=new UserDAOImpl();
+	
+
+	List<Grou> gList =udao.queryGroup();
+	
+	if (gList!=null) {
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.registerJsonValueProcessor(Timestamp.class , new JsonDateValueProcessor());
+		JSONArray js=JSONArray.fromObject(gList,jsonConfig);
+		JSONObject obj=new JSONObject();
+		obj.put("data", js.toString());
+	this.grouObj=obj;
+	System.out.println(obj);
+		return "queryGrou_success";
+	}
+	else {
+		return "query_error";
+	}
+
+}
+
 
 }

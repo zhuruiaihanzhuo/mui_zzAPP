@@ -74,11 +74,21 @@
   
   </select>
   
+  <select id="GroupAll"  parameterType="String" resultMap="GrouMap">
+    SELECT * FROM grou
+  
+  </select>
+  
+  
 <select id="selectAll"  parameterType="bean.user_auth.Users" resultMap="users">
     SELECT * FROM users 
   
   </select>
 
+<select id="selectDepar"  parameterType="bean.user_auth.Users" resultMap="users">
+    SELECT * FROM users where bumen=#{depar}
+  
+  </select>
 
 
 

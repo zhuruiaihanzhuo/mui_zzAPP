@@ -172,7 +172,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var urlStr = document.URL;  
              var endIndex = urlStr.indexOf('xxxxxxxxxx');  
              
-            urlStr = urlStr.substring(0, 40); 
+            urlStr = urlStr.substring(0, 32); 
           
           window.top.location= urlStr + "/login.jsp";  // 跳转到登录页  
            

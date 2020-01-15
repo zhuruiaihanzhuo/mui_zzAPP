@@ -10,7 +10,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>欢迎登录后台管理界面平台</title>
+<title>欢迎登录移动后台管理系统</title>
 <link href="resource/css/style.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="resource/js/jquery.js"></script>
 <script src="resource/js/cloud.js" type="text/javascript"></script>
@@ -35,7 +35,7 @@
 
 
 <div class="logintop">    
-    <span>欢迎登录后台管理界面平台</span>    
+    <span>欢迎登录移动后台管理系统</span>    
     <ul>
 
     <li><a href="javascript:void(0)">帮助</a></li>
@@ -66,6 +66,9 @@
 	
     </form>
     <script type="text/javascript">
+
+
+
     function check(){
     	if($("#username").val()!=null&& "" != $("#username").val() && $("#password").val() !=null&&
 			 "" != $("#password").val()){
@@ -82,7 +85,7 @@
 			return true;
 		},
 		 error:function(){
-	    alert("登录失败,账号或密码错误");
+	       alert("登录失败,账号或密码错误");
 	    	 return false;
 	    }
 		 });

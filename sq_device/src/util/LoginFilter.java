@@ -53,7 +53,7 @@ import javax.servlet.Filter;
          if (username == null || "".equals(username)) {
              // 跳转到登陆页面
         	 System.out.println(username);
-             servletResponse.sendRedirect("/Mybatis_seal1/error/500.html");
+             servletResponse.sendRedirect("/sq_device/error/500.html");
             
          } else {
              // 已经登陆,继续此次请求

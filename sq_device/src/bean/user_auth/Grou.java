@@ -6,6 +6,7 @@ public class Grou {
 
 	private int id;
 	private  String grou;
+	private  String text;
 	private String  principal;
 	private String  qc;
 	private String  department;
@@ -15,16 +16,27 @@ public class Grou {
 	
 	
 	
-	
-	
+
+
 	public Grou() {
 		super();
 	}
 	
-	public Grou(String grou, String principal, String qc, String department,
-			String creater, Timestamp time) {
+	@Override
+	public String toString() {
+		return "Grou [id=" + id + ", grou=" + grou + ", text=" + text
+				+ ", principal=" + principal + ", qc=" + qc + ", department="
+				+ department + ", creater=" + creater + ", time=" + time + "]";
+	}
+
+
+
+
+	public Grou(String grou, String text, String principal, String qc,
+			String department, String creater, Timestamp time) {
 		super();
-		this.grou =grou;
+		this.grou = grou;
+		this.text = text;
 		this.principal = principal;
 		this.qc = qc;
 		this.department = department;
@@ -32,12 +44,40 @@ public class Grou {
 		this.time = time;
 	}
 
-	@Override
-	public String toString() {
-		return "Grou [id=" + id + ",grou=" + grou + ", principal="
-				+ principal + ", qc=" + qc + ", department=" + department
-				+ ", creater=" + creater + ", time=" + time + "]";
+
+
+
+	public Grou(int id, String grou, String text, String principal, String qc,
+			String department, String creater, Timestamp time) {
+		super();
+		this.id = id;
+		this.grou = grou;
+		this.text = text;
+		this.principal = principal;
+		this.qc = qc;
+		this.department = department;
+		this.creater = creater;
+		this.time = time;
 	}
+
+
+
+
+	public String getText() {
+		return text;
+	}
+
+
+
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	
+
+
+	
 	public int getId() {
 		return id;
 	}

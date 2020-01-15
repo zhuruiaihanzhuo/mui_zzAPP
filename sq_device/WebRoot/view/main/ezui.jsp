@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">
 
-<title>设备后台管理系统</title>
+<title>移动后台管理系统</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -75,9 +75,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 		
 			</div>
-		<div data-options="region:'north',split:true,title:'<center>后台管理系统</center>'" style="height: 66px;background-color: #99FFFF"
+		<div data-options="region:'north',split:true,title:'<center>移动后台管理系统</center>'" style="height: 66px;background-color: #99FFFF"
 			><div    style=" color: #000033;" align="right"><b style="color: #663300"><%=session.getAttribute("name")%></b>
-			欢迎您&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><a href="login.jsp" target="_parent">注销</a></b></div><div id="show"  align="right"></div></div>
+			欢迎您&nbsp;&nbsp;&nbsp;<b><a href="login.jsp" target="_parent">注销</a></b></div><div id="show"  align="right"></div></div>
 		<!-- <div data-options="region:'east',split:true " style="width: 150px"
 			title="east"></div> -->
 <!-- 		<div id="mm" class="easyui-menu" style="width:120px;">
@@ -283,21 +283,21 @@ function jsonbl(data){
     var h=now.getHours();
     var m=now.getMinutes();
     var s=now.getSeconds();
-    m=checkTime(m)
-    s=checkTime(s)
+    m=checkTime(m);
+    s=checkTime(s);
 
-    var weekday=new Array(7)
-    weekday[0]="星期日"
-    weekday[1]="星期一"
-    weekday[2]="星期二"
-    weekday[3]="星期三"
-    weekday[4]="星期四"
-    weekday[5]="星期五"
-    weekday[6]="星期六"
+    var weekday=new Array(7);
+    weekday[0]="星期日";
+    weekday[1]="星期一";
+    weekday[2]="星期二";
+    weekday[3]="星期三";
+    weekday[4]="星期四";
+    weekday[5]="星期五";
+    weekday[6]="星期六";
     var w=weekday[now.getDay()]; //js获取的星期是0~6,0是星期天；
     document.getElementById("show").innerHTML=year+"年"+month+"月"+day+"日 "+w+"  "+h+":"+m+":"+s;
-    t=setTimeout('showTime()',500)
-  }
+    t=setTimeout('showTime()',500);
+  };
 		
    </script>
 </html>

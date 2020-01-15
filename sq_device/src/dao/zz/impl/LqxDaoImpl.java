@@ -1,9 +1,9 @@
 package dao.zz.impl;
 
 import java.io.IOException;
-import java.sql.Timestamp;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -41,14 +41,37 @@ public class LqxDaoImpl implements LqxDao {
 	}
 
 	@Override
-	public List<Lqx> queryB(String stateL) {
+	public List<Lqx> queryB(String user) {
 		DBA dba=new DBA();
 		List <Lqx> lList=new ArrayList<Lqx>();
 		SqlSession sqlSession=null;
 		try {
 		
 		sqlSession=	dba.getSqlSession();
-		lList= sqlSession.selectList("Lqx.queryB", stateL);
+		lList= sqlSession.selectList("Lqx.queryB", user);
+		//通过sqlSession执行sql语句；
+		
+		System.out.println(lList);
+		sqlSession.commit();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if (sqlSession !=null) {
+				sqlSession.close();
+			}
+			
+		}
+	return lList;
+	}
+	public List<Lqx> queryYSQ(String user) {
+		DBA dba=new DBA();
+		List <Lqx> lList=new ArrayList<Lqx>();
+		SqlSession sqlSession=null;
+		try {
+		
+		sqlSession=	dba.getSqlSession();
+		lList= sqlSession.selectList("Lqx.queryYSQ", user);
 		//通过sqlSession执行sql语句；
 		
 		System.out.println(lList);
@@ -244,6 +267,56 @@ public class LqxDaoImpl implements LqxDao {
 		//通过sqlSession执行sql语句；
 		
 		System.out.println(lList);
+		sqlSession.commit();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if (sqlSession !=null) {
+				sqlSession.close();
+			}
+			
+		}
+	return lList;
+	}
+
+	@Override
+	public List<Lqx> queryBM(String depar) {
+		DBA dba=new DBA();
+		List <Lqx> lList=new ArrayList<Lqx>();
+		SqlSession sqlSession=null;
+		try {
+		
+		sqlSession=	dba.getSqlSession();
+		lList= sqlSession.selectList("Lqx.queryBM", depar);
+		//通过sqlSession执行sql语句；
+		
+		System.out.println(depar);
+		sqlSession.commit();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if (sqlSession !=null) {
+				sqlSession.close();
+			}
+			
+		}
+	return lList;
+	}
+
+	@Override
+	public List<Lqx> queryZK() {
+		DBA dba=new DBA();
+		List <Lqx> lList=new ArrayList<Lqx>();
+		SqlSession sqlSession=null;
+		try {
+		
+		sqlSession=	dba.getSqlSession();
+		lList= sqlSession.selectList("Lqx.queryZK");
+		//通过sqlSession执行sql语句；
+		
+		
 		sqlSession.commit();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

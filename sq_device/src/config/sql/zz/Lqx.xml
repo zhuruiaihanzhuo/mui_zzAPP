@@ -35,15 +35,28 @@
   </resultMap>
 
    <select id="queryB"  parameterType="String"   resultMap="LqxResult">
-    SELECT * FROM lqx where stateL=#{stateL} or stateL="巡检审批" or stateL="质控审批" 
+    SELECT * FROM lqx WHERE (stateL='班长审批' and principalL=#{user})or(stateL='巡检审批' AND qcL=#{user})or( stateL='质控审批' and qc_real=#{user})  
    
   </select>
   
   <select id="queryH"  parameterType="String"   resultMap="LqxResult">
-    SELECT * FROM lqx where proposerL=#{user} and stateL like "完结%"  or stateL like "未通过%"
+    SELECT * FROM lqx where proposerL=#{user} and (stateL like "完结%"  or stateL like "未通过%")
    
   </select>
   
+  <select id="queryBM"  parameterType="String"   resultMap="LqxResult">
+    SELECT * FROM lqx where departmentL=#{depar} <!-- and (stateL like "完结%"  or stateL like "未通过%") -->
+   
+  </select>
+  <select id="queryZK"  parameterType="String"   resultMap="LqxResult">
+    SELECT * FROM lqx<!--  where  stateL like "完结%"  or stateL like "未通过%" -->
+   
+  </select>
+  
+  
+   <select id="queryYSQ"  parameterType="String"   resultMap="LqxResult">
+   SELECT * FROM lqx WHERE proposerL=#{user} AND   not( stateL like "完结%"  or stateL like "未通过%")
+  </select>
  
   
   
@@ -68,15 +81,16 @@
     princ_resu = #{princ_resu},
     stateL = #{stateL},
    prDescr = #{prDescr},
-   prTime = #{prTime}
-   
+   prTime = #{prTime}   
     WHERE
     propNum = #{propNum}
   </update>
    <update id="updateQc" parameterType="bean.zz.Lqx" >
   UPDATE lqx SET
+    sortL = #{sortL},
     qc_resu = #{qc_resu},
     stateL = #{stateL},
+    qc_real=#{qc_real},
    qcDescr = #{qcDescr},
    qcTime = #{qcTime}
    
@@ -89,6 +103,7 @@
     qr_resu = #{qr_resu},
     stateL = #{stateL},
    qrDescr = #{qrDescr},
+   sort_real=#{sort_real},
    qrTime = #{qrTime}
    
     WHERE

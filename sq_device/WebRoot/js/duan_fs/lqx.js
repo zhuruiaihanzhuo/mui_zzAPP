@@ -93,15 +93,11 @@ alert('Item ID:'+row.id+"Price:"+row.bianhao);
 
 		};
 		
-		function showUser(depar){
+		function showUser(){
 			$.ajax({
-				url:'user/Users_queryByDepar.do',
+				url:'user/Users_queryAll.do',
 				type:"post",
 				dataType:"json",
-				data:{
-					depar:depar
-				},
-				
 					success:function(data){
 				var data1=data.data;
 				var result=[];
@@ -143,7 +139,7 @@ alert('Item ID:'+row.id+"Price:"+row.bianhao);
 			 
 		 	 if($("#username").val()!=null&& "" != $("#username").val() && $("#name").val() !=null&&
 					 "" != $("#name").val() && $("#lururen").val() !=null&& "" != $("#lururen").val()&&
-					 $("#bumen").val() !=null&& "" != $("#bumen").val()&&$("#grou").val() !=null&& "" != $("#grou").val()){ 
+					 $("#bumen").val() !=null&& "" != $("#bumen").val()&&$("#group").val() !=null&& "" != $("#group").val()){ 
 				 $.ajax({
 				type: "post",
 				 url:"user/Users_addUser.do",
@@ -151,7 +147,7 @@ alert('Item ID:'+row.id+"Price:"+row.bianhao);
 				
 				username: $("#username").val(),
 				bumen: $("#bumen").val(),
-				group: $("#grou").val(),
+				group: $("#group").val(),
 				name : $("#name").val(),
 				lururen : $("#lururen").val()
 				
@@ -251,9 +247,9 @@ alert('Item ID:'+row.id+"Price:"+row.bianhao);
 		 
 
 				};
-			function show1(){
+			function showLqx(){
 			$.ajax({
-				url:'fszc/Fszc_queryByDepartment.do',
+				url:'zz/Lqx_queryBM.do',
 				type:"post",
 				dataType:"json",
 				data:{
@@ -266,25 +262,25 @@ alert('Item ID:'+row.id+"Price:"+row.bianhao);
 				 for ( var machine in data1) {
 				
 		                var row_data = {
-		                    lurushijian : data1[machine].lurushijian,      
-		                   lururen : data1[machine].lururen,		                   
-		                   department : data1[machine].department,
-		                    office : data1[machine].office,
-		                       category: data1[machine].category,
-		                       brand:	data1[machine].brand,
-		                     type: data1[machine].type,
-		                    ccNumber : data1[machine].ccNumber,
-		                     zcNumber : data1[machine].zcNumber,
-		                     personIC  : data1[machine].personIC,
-		                     personCY: data1[machine].personCY,
-		                     area:	data1[machine].area,
-		                     zpCount : data1[machine].zpCount,
-		                     state : data1[machine].state,
-		                     newfcNumber : data1[machine].newfcNumber,
-		                     admin  : data1[machine].admin,
-		                     wxNumber: data1[machine].wxNumber,
-		                     wxPerson:	data1[machine].wxPerson,
-		                     remarks : data1[machine].remarks
+		                		proposerL : data1[machine].proposerL,      
+		                		groupL: data1[machine].groupL,		                   
+		                   departmentL : data1[machine].departmentL,
+		                   principalL : data1[machine].principalL,
+		                   qcL: data1[machine].qcL,
+		                   descriptionL:data1[machine].descriptionL,
+		                   supplierL: data1[machine].supplierL,
+		                   itemNameL : data1[machine].itemNameL,
+		                   itemNumL : data1[machine].itemNumL,
+		                   lotL  : data1[machine].lotL,
+		                   sortL: data1[machine].sortL,
+		                   sortNum:	data1[machine].sortNum,
+		                   stateL : data1[machine].stateL,
+		                   apTime : data1[machine].apTime,
+		                   qc_resu : data1[machine].qc_resu,
+		                   princ_resu  : data1[machine].princ_resu,
+		                   qr_resu: data1[machine].qr_resu,
+		                   sort_real:  data1[machine].sort_real
+		                   
 		                   
 		                };
 		               //因为html元素无法使用子对象.属性  ，所以先把需要的格式保存为集合，之后按照正常加载能够实现正常分页
@@ -306,6 +302,62 @@ alert('Item ID:'+row.id+"Price:"+row.bianhao);
 			
 			
 			
+			
+			
+			function showLqxZK(){
+				$.ajax({
+					url:'zz/Lqx_queryZK.do',
+					type:"post",
+					dataType:"json",
+					data:{
+						 department:$("#department").val()
+					},
+					success:function(data){
+					
+					var data1=data.data;
+					var result=[];
+					 for ( var machine in data1) {
+					
+			                var row_data = {
+			                		proposerL : data1[machine].proposerL,      
+			                		groupL: data1[machine].groupL,		                   
+			                   departmentL : data1[machine].departmentL,
+			                   principalL : data1[machine].principalL,
+			                   qcL: data1[machine].qcL,
+			                   descriptionL:data1[machine].descriptionL,
+			                   supplierL: data1[machine].supplierL,
+			                   itemNameL : data1[machine].itemNameL,
+			                   itemNumL : data1[machine].itemNumL,
+			                   lotL  : data1[machine].lotL,
+			                   sortL: data1[machine].sortL,
+			                   sortNum:	data1[machine].sortNum,
+			                   stateL : data1[machine].stateL,
+			                   apTime : data1[machine].apTime,
+			                   qc_resu : data1[machine].qc_resu,
+			                   princ_resu  : data1[machine].princ_resu,
+			                   qr_resu: data1[machine].qr_resu,
+			                   sort_real:  data1[machine].sort_real
+			                   
+			                   
+			                };
+			               //因为html元素无法使用子对象.属性  ，所以先把需要的格式保存为集合，之后按照正常加载能够实现正常分页
+			               result.push(row_data);
+			              
+							$('#dg1').datagrid('loadData',result);
+							};
+			},
+						error: function (jqXHR, textStatus, errorThrown) {
+						
+					
+			        }
+
+							
+							
+				});
+				
+				}	
+				
+				
 			
 			function submit_fszc(){
 				
@@ -374,31 +426,5 @@ alert('Item ID:'+row.id+"Price:"+row.bianhao);
 
 			}
 			
-			 function showOffice(){
-
-			    	$.ajax({
-			    		url:'login/Users_queryGrou.do',
-			    		type:"post",
-			    		dataType:"json",
-			    		success:function(data){
-			    		var data1=data.data;
-			    		var test=[];
-			    		 var i=0;
-			    		 for ( var machine in data1) {
-			    		       i=i++;
-			                    test.push({
-			                        "id" : data1[machine].id,
-			                        "text" : data1[machine].text
-			                    });
-			                      // alert("i==="+i+"==="+data1[i].shuoming+"==data1[machine].id="+data1[machine].id);
-			                       $("#grou").combobox("loadData", test);   
-			                      $("#grou").combobox('setValue', data1[0].text);
-			                     // $("#quyu").combobox('setValue', data1[0].shuoming);
-			                
-			                   }
-			                /*     $('#quyu').combobox('reload',row_data);} */
-			    	}
-			    	});
-			    	}	
-			    			
+			
 			

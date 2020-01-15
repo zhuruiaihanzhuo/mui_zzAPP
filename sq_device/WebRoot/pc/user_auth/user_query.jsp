@@ -58,12 +58,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="js/easyUI/jquery.min.js"></script>
 <script type="text/javascript" src="js/easyUI/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="js/duan_fs/duan_fs.js"></script>
-<script type="text/javascript"
-	src="js/datagrid-filter/datagrid-filter.js"></script>
+<script type="text/javascript"	src="js/datagrid-filter/datagrid-filter.js"></script>
 <script>
 	$(document).ready(function(){
+	var depar="<%=session.getAttribute("bumen")%>";
 	 user_todatagrid();
-	showUser();
+	showUser(depar);
 	
 	});
 	window.addEventListener("orientationchange", function() {

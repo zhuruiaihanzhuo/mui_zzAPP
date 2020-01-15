@@ -43,10 +43,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			<td>部门:</td>
 	    			<td><input class="easyui-textbox" type="text" id="bumen" data-options="required:true" readonly="readonly"></input></td>
 	    		</tr>
-	    			<tr>
+	    		<tr>
 	    			<td>科室/班组:</td>
-	    			<td><input class="easyui-textbox" type="text" id="group" data-options="required:true"></input></td>
+	    			 <td><input class="easyui-combobox" id="grou" name="grou" data-options="valueField:'id',textField:'text',editable:false" />
+        			<td style="color: red">(请准确选择)</td>
+        
+	    
 	    		</tr>
+	    		
+	    	
 	    			<tr>
 	    			<td>录入人:</td>
 	    			<td><input class="easyui-textbox" type="text" id="lururen" data-options="required:true" readonly="readonly"></input></td>
@@ -71,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 
 
-
+showOffice();
  setname();
                               
 function setname(){
@@ -92,7 +97,7 @@ var bumen="<%=session.getAttribute("bumen")%>";
             var urlStr = document.URL;  
              var endIndex = urlStr.indexOf('xxxxxxxxxx');  
              
-            urlStr = urlStr.substring(0, 40); 
+            urlStr = urlStr.substring(0, 32); 
           
           window.top.location= urlStr + "/login.jsp";  // 跳转到登录页  
            
